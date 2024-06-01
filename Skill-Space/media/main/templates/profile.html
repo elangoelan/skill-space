@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" >
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title>{{ user_profile.user }}'s Profie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="{% static 'css/profile.css'%}">
+  <style>
+.follow-btn {
+    font-size: 17px;
+    padding: 0.5em 2em;
+    border: transparent;
+    margin-left: 10px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: dodgerblue;
+    color: white;
+    border-radius: 4px;
+}
+
+.follow-btn:hover {
+    background: linear-gradient(90deg, rgba(30,144,255,1) 0%, rgba(0,212,255,1) 100%);
+}
+
+.follow-btn:active {
+    transform: translate(0em, 0.2em);
+}
+.resume-btn{
+  border: none;
+  outline: none;
+  background-color: #6c5ce7;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #a29bfe;
+  margin-left:10px;
+  margin-bottom:5px;
+}
+
+.resume-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #a29bfe;
+}
+</style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+<header>
+
+	<div class="container">
+
+		<div class="profile">
+
+			<div class="profile-image">
+
+				<img src="{{ user_profile.profileimg.url }}" alt="" width="150" height="150">
+
+			</div>
+
+			<div class="profile-user-settings">
+
+				<h1 class="profile-user-name">{{ user_profile.user }}</h1>
+				<button class="btn profile-settings-btn" aria-label="profile settings"><a href="{% url 'settings'%}" target="_blank"><i class="fas fa-cog" aria-hidden="true"></i></a></button>
+				{% if request.user != user_profile.user %}
+				<form action="{% url 'follower'%}" method="post" style="display: inline;">
+					{% csrf_token%}
+					<input type="hidden" value="{{user_profile.user}}" name="user">
+					<input type="hidden" value="{{request.user}}" name="follower">
+					<button class="follow-btn">{{text}}</button>
+				</form>
+			    {% endif %}
+				{% if pprof_available %}
+				    <a href="{% url 'resume' user_profile.id %} " target="_blank"><button class="resume-btn">{{user_profile}}'s Resume</button></a>
+				{% endif%}
+				
+			</div>
+
+			<div class="profile-stats">
+
+				<ul>
+					<li><span class="profile-stat-count">{{ posts.count }}</span> posts</li>
+					<li><span class="profile-stat-count">{{follower_count}}</span> followers</li>
+					<li><span class="profile-stat-count">{{following_count}}</span> following</li>
+				</ul>
+
+			</div>
+
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name">{{ user_profile.user }}</span> {{user_profile.bio}} 📷✈️🏕️</p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+
+<main>
+
+	<div class="container">
+
+		<div class="gallery">
+		  {% for post in posts%}
+			<div class="gallery-item" tabindex="0">
+
+				<img src="{{post.img.url}}" class="gallery-image" alt="">
+
+				<div class="gallery-item-type">
+
+					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
+
+				</div>
+				<div class="gallery-item-info">
+
+					<ul>
+						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i>{{post.no_of_likes}}</li>
+						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> nill</li>
+					</ul>
+
+				</div>
+
+			</div>
+		  {% endfor%}
+		</div>
+		<!-- End of gallery -->
+
+		<div class="loader"></div>
+
+	</div>
+	<!-- End of container -->
+
+</main>
+<!-- partial -->
+  <script  src="{% static 'js/profile.js'%}"></script>
+
+</body>
+</html>

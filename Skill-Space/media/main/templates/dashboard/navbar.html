@@ -1,0 +1,31 @@
+<section id="content">
+
+  <div id="header">
+    <div class="menu-button">
+      <a href="{% url  'home' %}"><i class="fa fa-star">SkillSpace</i></a>
+    </div>
+    <div class="header-nav">
+      <div class="nav">
+        <ul>
+          <li class="nav-settings">
+            <div class="font-icon"><i class="fa fa-tasks"></i></div>
+          </li>
+          <li class="nav-mail">
+            <div class="font-icon"><i class="fa fa-envelope-o"></i></div>
+          </li>
+          <li class="nav-calendar">
+            <div class="font-icon"><i class="fa fa-calendar"></i></div>
+          </li>
+          <li class="nav-chat">
+            <div class="font-icon"><i class="fa fa-comments-o"></i></div>
+          </li>
+          <li class="nav-profile">
+            <div class="nav-profile-image">
+              <a href="{% url 'profile' user.id %}"><img src="{{user.profileimg.url}}" alt="profile-img" alt="profile image"></a>
+              <div class="nav-profile-name">{{user}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

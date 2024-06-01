@@ -1,0 +1,19 @@
+<section id="sidebar"> 
+    <div class="white-label">
+    </div> 
+    <div id="sidebar-nav">   
+      <ul>
+        <li {% if request.path == '/profile_analytics'%}class="active"{% endif %}><a href="{% url 'profile_analytics'%}"><i class="fa fa-dashboard"></i>Profile</a></li>
+        <li {% if request.path == '/show/education'%} class="active" {% endif%}><a href="{% url 'showeducation' %}"><i class="fa fa-desktop"></i>Education</a></li>
+        <li {% if request.path == '/show/project'%} class="active" {% endif%}><a href="{% url 'show-project'%}"><i class="fa fa-usd"></i>Project</a></li>
+        <li {% if request.path == '/show/internship'%} class="active" {% endif%}><a href="{% url 'show-intern'%}"><i class="fa fa-pencil-square-o"></i>Internship</a></li>
+        <li {% if request.path == '/show/certification'%} class="active" {% endif%}><a href="{% url 'show-cert' %}"><i class="fa fa-sitemap"></i>Certifications</a></li>
+        <li {% if request.path == '/show/achivements'%} class="active" {% endif%}><a href="{% url  'show-achive'%}"><i class="fa fa-line-chart"></i>Achivements</a></li>
+        <li {% if request.path == '/show/skill'%} class="active" {% endif%}><a href="{% url 'show-skill'%}"><i class="fa fa-comments-o"></i>Skills</a></li>
+        <li {% if request.path == '/show/soft-skill'%} class="active" {% endif%}><a href="{% url 'show-skill-soft'%}"><i class="fa fa-map-marker"></i>Soft Skills</a></li>     
+        <li {% if request.path == '/show/education'%} class="active" {% endif%}><a href="{% url 'show-hobbies'%}"><i class="fa fa-users"></i>Hobbies</a></li>
+        <li {% if request.path == '/show/social-media-url'%} class="active" {% endif%}><a href="{% url 'show-social-media-url'%}"><i class="fa fa-share-square-o"></i>Social Media</a></li>
+        <li {% if request.path == '/show/languages'%} class="active" {% endif%}><a href="{% url 'show-languages'%}"><i class="fa fa-language"></i>Languages</a></li>
+      </ul>
+    </div>
+  </section>
